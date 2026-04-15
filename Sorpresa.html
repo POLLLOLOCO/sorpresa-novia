@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para ti ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    text-align: center;
+    font-family: Arial;
+    overflow: hidden;
+}
+
+img {
+    width: 220px;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+#texto {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 20px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+#no {
+    position: absolute;
+}
+</style>
+</head>
+
+<body>
+
+<img src="foto.png">
+<div id="texto"></div>
+<button onclick="iniciar()">Haz clic aquí ❤️</button>
+
+<script>
+const nombre = "Mi niña 💖";
+
+const mensajes = [
+    `Hola ${nombre} ❤️`,
+    "Quería hacer algo especial para ti...",
+    "Eres lo mejor que me ha pasado 💖",
+    "Gracias por estar siempre a mi lado 🥰",
+    "Quiero que seas tú...",
+    "La mujer con la que pase el resto de mi vida 💕",
+    "No solo me regalas felicidad",
+    "Sino que me haces una mejor persona",
+    "Quiero ser cada día mejor para estar a tu lado",
+    "Ya sabes todo lo que quiero contigo, pero...",
+    "Siempre me gusta recordarte lo maravillosa que eres",
+    "Gracias por existir y por los momentos juntos",
+    "TE AMO ❤️❤️❤️ MUCHOOOOOOOOOOOOOOOOO"
+];
+
+let i = 0;
+const texto = document.getElementById("texto");
+
+function escribir(m, j = 0) {
+    if (j <= m.length) {
+        texto.innerHTML = m.substring(0, j);
+        setTimeout(() => escribir(m, j + 1), 40);
+    } else {
+        setTimeout(siguiente, 1500);
+    }
+}
+
+function siguiente() {
+    i++;
+    if (i < mensajes.length) {
+        escribir(mensajes[i]);
+    } else {
+        final();
+    }
+}
+
+function iniciar() {
+    document.querySelector("button").style.display = "none";
+    escribir(mensajes[0]);
+}
+
+function final() {
+    texto.innerHTML = "¿Quieres seguir conmigo? 💍";
+
+    let si = document.createElement("button");
+    si.innerHTML = "Sí ❤️";
+    si.onclick = respuesta;
+
+    let no = document.createElement("button");
+    no.innerHTML = "No 😢";
+    no.id = "no";
+
+    no.onmouseover = () => {
+        no.style.top = Math.random() * 300 + "px";
+        no.style.left = Math.random() * 300 + "px";
+    };
+
+    document.body.appendChild(si);
+    document.body.appendChild(no);
+}
+
+function respuesta() {
+    document.body.innerHTML = "<h1>Sabía que dirías que sí 😍<br>TE AMO ❤️❤️❤️</h1>";
+}
+
+// corazones
+setInterval(() => {
+    let c = document.createElement("div");
+    c.innerHTML = "❤";
+    c.style.position = "absolute";
+    c.style.left = Math.random() * window.innerWidth + "px";
+    c.style.top = "100%";
+    c.style.color = "red";
+
+    document.body.appendChild(c);
+
+    let subir = setInterval(() => {
+        c.style.top = (c.offsetTop - 3) + "px";
+        if (c.offsetTop < 0) {
+            clearInterval(subir);
+            c.remove();
+        }
+    }, 50);
+}, 300);
+</script>
+
+</body>
+</html>
